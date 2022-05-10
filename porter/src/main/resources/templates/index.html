@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Директории и файлы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <h1 class="mt-3">Директории и файлы</h1>
+                <nav class="row d-flex flex-wrap">
+                    <div class="col col-2 navbar-brand mt-3">Новая директория</div>
+                    <ul class="col col-9 menu ml-auto">
+                        <li>
+                            <form action="/" method="post" class="search d-flex" th:object="${element}">
+                                <input id="path" name="path" type="text" placeholder="Введите путь к директории" aria-label="Search"  class="form-control mr-5 ml-5 mt-3">
+                                <button type="submit" id="getPath" role="button" class="btn btn-outline-secondary text-nowrap mt-3">Добавить в список</button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="main">
+            <div class="container">
+                <div class="mt-5 mb-3">
+                    <h2>Список директорий и файлов</h2>
+                </div>
+                <table class="table table-responsive table-striped table-hover border-dark">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th scope="col">дата</th>
+                            <th scope="col">базовая директория</th>
+                            <th scope="col">директорий</th>
+                            <th scope="col">файлов</th>
+                            <th scope="col">суммарный размер файлов</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="el : ${directories.content}">
+                        <form th:action="@{/files}" method="post" class="search d-flex" th:object="${el}">
+                            <tr>
+                                <input type="hidden" th:value="*{id}" name="id">
+                                <input type="hidden" th:value="*{path}" name="path">
+                                <td th:text="*{date}"></td>
+                                <td th:text="*{path}"></td>
+                                <td th:text="*{dirCount}"></td>
+                                <td th:text="*{fileCount}"></td>
+                                <td th:text="*{size}"></td>
+                                <td>
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        файлы
+                                    </button>
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <nav class="footer">
+            <span class="pageNum"th:if="${directories.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+                <a class="pageLink" th:href="@{/(size=${directories.size}, page=${pageNumber})}" th:text="${pageNumber}"
+                       th:class="${pageNumber==directories.number + 1} ? active">
+                </a>
+            </span>
+        </nav>
+    </div>
+
+<script type="text/javascript" th:href="@{js/script.js}" src="js/script.js"></script>
+</body>
+</html>

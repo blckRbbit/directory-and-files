@@ -1,0 +1,49 @@
+body {
+    font-size: 12px;
+}
+
+.menu {
+    list-style-type: none;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td:nth-child(2) {
+    width: 45%;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:16;
+}
+
+.pageNum {
+    margin: 5px;
+    font-size: 16px;
+}
+
+.pageNum a {
+    color: black;
+    text-decoration: none;
+}
+
+.pageNum a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.footer {
+    position:fixed;
+    left:0px;
+    bottom:20px;
+    height:30px;
+    width:100%;
+}
+
+.pageLink.active {
+    font-size: 28px;
+}

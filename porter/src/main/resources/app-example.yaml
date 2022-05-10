@@ -1,0 +1,10 @@
+server:
+  port: 8881
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5446/porter_db?characterEncoding=utf8
+    username: YOUR LOGIN
+    password: YOUR PASSWORD
